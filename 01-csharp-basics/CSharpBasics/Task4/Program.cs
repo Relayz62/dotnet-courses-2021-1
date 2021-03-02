@@ -6,34 +6,21 @@ namespace Task4
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Console.WriteLine("Написать программу, которая запрашивает с клавиатуры \nчисло N и выводит на экран изображение, состоящее из N треугольников");
-
-            Console.WriteLine("Привет. \n " +
-            "Задание: Написать программу, которая запрашивает с клавиатуры число N и выводит на экран треугольник из звёзд,\n состоящее из N строк");
             int digit;
-            string s;
-        go: Console.WriteLine("Введите число:");
-            s = Console.ReadLine();
-            if (int.TryParse(s, out digit))
+            Console.WriteLine("Привет. \n " +
+           "Задание: Написать программу, которая запрашивает с клавиатуры число N и выводит на экран треугольник из звёзд,\n состоящее из N строк");
+            while ((int.TryParse(Console.ReadLine(), out digit) & digit > 0) == false)
             {
-                if (digit <= 0) { Console.WriteLine("Введите числа больше нуля."); goto go; }
-                else
+                Console.WriteLine("Неверный ввод. Допустимые значения: числа больше нуля.");
+            }
+            for (int i = 1; i <= digit; i++)
+            {
+                for (int j = 0; j < i; j++)
                 {
-                    for (int j = 0; j < digit; j++)
-                    { 
-                        for (int i = 0; i < digit; i++)
-                        {
-                            Console.WriteLine(new string(' ', digit - i) + new string('*', i * 2 + 1));
-                        }
-                    }
+                   Console.WriteLine(new string('*', j).PadLeft(digit+3) + "*" + new string('*', j));
                 }
             }
-            else
-            {
-                Console.WriteLine("Неверный формат, попробуйте ещё раз.");
-                goto go;
-            }
+            Console.ReadKey();
         }
     }
 }
