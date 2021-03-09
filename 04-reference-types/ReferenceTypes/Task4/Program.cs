@@ -10,11 +10,13 @@ namespace Task4
             MyString string2 = new MyString("абв");
             MyString charString = new MyString('a','b','c');
             MyString emptyString = new MyString();
-            Console.WriteLine((myString + string2).ToString());
-            Console.WriteLine((myString - string2).ToString());
-            Console.WriteLine(charString.ToString());
-            Console.WriteLine(emptyString.ToString());
-            Console.WriteLine(MyString.IsNullOrEmpty(emptyString));
+            Console.WriteLine("+: " + (myString + string2).ToString());
+            Console.WriteLine("-: " + (myString - string2).ToString());
+            Console.WriteLine("CharArray: " + charString.ToString());
+            Console.WriteLine("Empty: " + emptyString.ToString());
+            Console.WriteLine("IsNullOrEmpty: "+ MyString.IsNullOrEmpty(emptyString));
+            Console.WriteLine("==: " + (myString == string2));
+            Console.WriteLine("!=: " + (myString != string2));
         }
     }
 }
