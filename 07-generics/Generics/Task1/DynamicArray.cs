@@ -7,7 +7,6 @@ namespace Task1
     class DynamicArray<T> where T : new()
     {
         private T[] _itemsArray;
-        private int _size;
         private static readonly T[] _emptyArray = new T[0];
         private static readonly int _defaultCapacity = 8;
 
@@ -67,12 +66,9 @@ namespace Task1
 
         public int Length
         {
-            get { return _size; }
-            private set
-            {
-                _size = value;
-            }
+            get; private set;
         }
+
         public int Capacity
         {
             get { return _itemsArray.Length; }
@@ -118,7 +114,7 @@ namespace Task1
 
         public void Add(T value)
         {
-            if(Length == _itemsArray.Length)
+            if(Length == Capacity)
             {
                 Array.Resize(ref _itemsArray, _itemsArray.Length * 2);
             }
@@ -127,9 +123,9 @@ namespace Task1
 
         public void AddRange(params T[] values)
         {
-            if(_itemsArray.Length < values.Length + Length)
+            while (_itemsArray.Length < values.Length + Length)
             {
-                Array.Resize(ref _itemsArray, _itemsArray.Length + values.Length);
+                Array.Resize(ref _itemsArray, _itemsArray.Length * 2);
             }
             values.CopyTo(_itemsArray, Length);
             Length += values.Length;
@@ -156,7 +152,7 @@ namespace Task1
             Length--;
             if (index < Length)
             {
-                Array.Copy(_itemsArray, index + 1, _itemsArray, index, _size - index);
+                Array.Copy(_itemsArray, index + 1, _itemsArray, index, Length - index);
             }
             _itemsArray[Length] = default(T);
         }

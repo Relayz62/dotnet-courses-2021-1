@@ -8,7 +8,7 @@ namespace Task1
         static void Main(string[] args)
         {
 
-            int[] mass1 = new int[5] { 1, 2, 3, 4, 5 };
+            int[] mass1 = new int[10] { 1, 2, 3, 4, 5,6,7,8,9,10 };
             List<int> list = new List<int>() { 1, 2, 3 };
             DynamicArray<int> test1 = new DynamicArray<int>(list);
             test1.PrintDynamicArray();
