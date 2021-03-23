@@ -123,14 +123,14 @@ namespace Task1
 
         public void AddRange(params T[] values)
         {
-            int size = _itemsArray.Length;
+            int lenght = _itemsArray.Length;
             if (_itemsArray.Length < values.Length + Length)
             {
-                while (size < values.Length + Length)
+                while (lenght < values.Length + Length)
                 {
-                    size = size * 2;
+                    lenght = lenght * 2;
                 }
-                Array.Resize(ref _itemsArray, size);
+                Array.Resize(ref _itemsArray, lenght);
             }
             values.CopyTo(_itemsArray, Length);
             Length += values.Length;
