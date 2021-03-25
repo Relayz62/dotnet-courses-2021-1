@@ -9,31 +9,34 @@ namespace Task3
     {
         static void Main(string[] args)
         {
-            string text = @"The little dragon lived by the sea. The sea is big, the dragon is small.";
+            string text = @"Hello, guys! How are you, guys? Cool? Cool!";
             Dictionary<string, int> dict = CountWords(text);
-            foreach (var item in dict)
+
+            foreach (KeyValuePair<string, int> pair in dict)
             {
-                Console.WriteLine(item.Key + " " + item.Value);
+                Console.WriteLine($"{pair.Key} : {pair.Value}");
             }
-            
+
         }
 
 
-        private static Dictionary<string,int> CountWords(string text)
+        private static Dictionary<string, int> CountWords(string text)
         {
             Dictionary<string, int> dictionary = new Dictionary<string, int>();
-            text = text.ToUpper();
-            string[] wordArray = text.Split(new char[] { ' ', ',', '.', ':', ';', '-', '?', '!', '\'','"',']','[' }, StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (string world in wordArray)
+            string[] wordArray = Regex.Split(text, @"\W", RegexOptions.IgnoreCase).Where(word => !string.IsNullOrWhiteSpace(word)).ToArray();
+
+            foreach (string word in wordArray)
             {
-                if (dictionary.ContainsKey(world))
-                    dictionary[world]++;
+                if (dictionary.ContainsKey(word))
+                    dictionary[word]++;
                 else
                 {
-                    dictionary[world] = 1;
+                    dictionary[word] = 1;
                 }
             }
+
+
             return dictionary;
         }
     }
