@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Task2
@@ -26,27 +27,7 @@ namespace Task2
         public DynamicArray(IEnumerable<T> collection)
         {
             if (collection == null) throw new ArgumentNullException();
-
-            ICollection<T> listCollection = collection as ICollection<T>;
-            if (listCollection != null)
-            {
-                int count = listCollection.Count;
-                if (count == 0)
-                {
-                    _itemsArray = _emptyArray;
-                }
-                else
-                {
-                    _itemsArray = new T[count];
-                    listCollection.CopyTo(_itemsArray, 0);
-                    Length = count;
-                }
-            }
-            else
-            {
-                Length = 0;
-                _itemsArray = _emptyArray;
-            }
+            _itemsArray = collection.ToArray();
         }
 
         public IEnumerator<T> GetEnumerator()

@@ -9,10 +9,12 @@ namespace Task3
     {
         static void Main(string[] args)
         {
-            string text = @"Hello, guys! How are you, guys? Cool? Cool!";
+            string text = @"Hello, guys! How are you, guys? Cool? Cool! Guys!";
             Dictionary<string, int> dict = CountWords(text);
 
-            foreach (KeyValuePair<string, int> pair in dict)
+            Func<KeyValuePair<string, int>, int> orders = (pair) => pair.Value;
+
+            foreach (KeyValuePair<string, int> pair in dict.OrderByDescending(orders))
             {
                 Console.WriteLine($"{pair.Key} : {pair.Value}");
             }
@@ -22,9 +24,9 @@ namespace Task3
 
         private static Dictionary<string, int> CountWords(string text)
         {
-            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+            Dictionary<string, int> dictionary = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
-            string[] wordArray = Regex.Split(text, @"\W", RegexOptions.IgnoreCase).Where(word => !string.IsNullOrWhiteSpace(word)).ToArray();
+            string[] wordArray = Regex.Split(text, @"\W").Where(word => !string.IsNullOrWhiteSpace(word)).ToArray();
 
             foreach (string word in wordArray)
             {

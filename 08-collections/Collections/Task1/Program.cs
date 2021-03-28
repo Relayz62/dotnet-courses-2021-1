@@ -22,8 +22,10 @@ namespace Task1
         {
             while(collection.Count !=1)
             {
-                for (int i = 1; i < collection.Count; i+=2)
+                for (int i = 1; i <= collection.Count; i+=2)
                 {
+                    if (i >= collection.Count)
+                        i = 0;
                     collection.Remove(collection.ElementAt(i--));
                 }
                 Console.WriteLine("//////////////////");
