@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Task1
 {
@@ -7,8 +9,9 @@ namespace Task1
         public delegate int StringComparer(string first, string second);
         static void Main(string[] args)
         {
-            string[] array = { "Как дела?", "Как дела?" };
-            Sort(array, CompareStrings);
+            StringComparer stringComparer = CompareStrings;
+            string[] array = { "Я", "Пошёл", "Совсем", "Гулять", "Один", "Аовсем" };
+            Sort(array, stringComparer);
             foreach (var item in array)
             {
                 Console.WriteLine(item);
@@ -18,29 +21,27 @@ namespace Task1
 
         public static void Sort(string[] array, StringComparer stringComparer)
         {
-            stringComparer += CompareStrings;
-            for (int i = 0; i < array.Length-1; i++)
+            for (int i = 0; i < array.Length; i++)
             {
-                switch(stringComparer(array[i], array[i+1]))
+                string word = array[i];
+                int index = i;
+                for (int j = i; j < array.Length; j++)
                 {
-                    case 0:
-                        Array.Sort<string>(array, (first, second) => string.Compare(first, second));
-                        break;
-                    case 1:
-                        string temp = array[i];
-                        array[i] = array[i + 1];
-                        array[i + 1] = temp;
-                        break;
-                }              
+                    if (stringComparer(word, array[j]) > 0)
+                    {
+                        word = array[j];
+                        index = j;
+                    }
+                }
+                array[index] = array[i];
+                array[i] = word;
             }
-            stringComparer -= CompareStrings;
         }
+
 
         public static int CompareStrings(string first, string second)
         {
-            if (first.Length > second.Length) return -1;
-            if (first.Length < second.Length) return 1;
-            return 0;
+            return first.Length - second.Length;
         }
     }
 }

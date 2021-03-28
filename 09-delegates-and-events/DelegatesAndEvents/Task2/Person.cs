@@ -15,16 +15,16 @@ namespace Task2
             Name = name;
         }
 
-        public string SayHello(string otherPerson, DateTime time)
+        public void SayHello(object otherPerson, OfficeEventArgs args)
         {
-            if (time.Hour < 12) return $"Доброе утро, {otherPerson}";
-            if (time.Hour >= 12 && time.Hour < 17) return $"Добрый день, {otherPerson}";
-            return $"Добрый вечер, {otherPerson}";
+            if (args.Time.Hour < 12) Console.WriteLine($"Доброе утро, {args.Name} - сказал {Name}");
+            if (args.Time.Hour >= 12 && args.Time.Hour < 17) Console.WriteLine($"Добрый день, {args.Name} - сказал {Name}");
+            if (args.Time.Hour >= 17) Console.WriteLine($"Добрый вечер, {args.Name}! - сказал {Name}");
         }
 
-        public string SayBye(string otherPerson)
+        public void SayBye(object otherPerson, OfficeEventArgs args)
         {
-            return $"До свидания, {otherPerson}!";
+            Console.WriteLine($"До свидания, {args.Name}! - сказал {Name}");
         }
         
     }

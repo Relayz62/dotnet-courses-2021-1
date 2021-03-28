@@ -4,31 +4,27 @@ using System.Text;
 
 namespace Task2
 {
-    public delegate void PersonCame(Person person, DateTime time);
-    public delegate void PersonLeft(Person person);
     public class Office
     {
-       // public event PersonCame OnCame;
-        public event PersonLeft OnLeft;
-
-        public event OfficeEventHandler OnCame;
-
-        public Office(List<Person> persons)
-        {
-            foreach (Person person in persons)
-            {
-               
-            }
-        }
-
+        private event OfficeEventHandler PersonCame;
+        private event OfficeEventHandler PersonLeft;
         public void Come(Person person)
         {
-            
+            Console.WriteLine($"{person.Name} пришёл на работу");
+            PersonCame?.Invoke(this, new OfficeEventArgs(person));
+            PersonCame += person.SayHello;
+            PersonLeft += person.SayBye;
         }
 
         public void Leave(Person person)
         {
-            
+            Console.WriteLine($"{person.Name} ушёл с работы");
+            if(PersonLeft != null)
+            {
+                PersonLeft -= person.SayBye;
+                PersonLeft?.Invoke(this, new OfficeEventArgs(person));
+                PersonCame -= person.SayHello;
+            }
         }
     }
 
