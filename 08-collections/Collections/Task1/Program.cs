@@ -11,7 +11,7 @@ namespace Task1
         {
             int N = 10;
             LinkedList<int> linkedList = new LinkedList<int>(Enumerable.Range(1, N));
-            List<int> list = new List<int>(Enumerable.Range(1, 10));
+            List<int> list = new List<int>(Enumerable.Range(1, N));
             PrintCollection(linkedList);
             RemoveEachSecondItem(linkedList);
 
@@ -20,15 +20,15 @@ namespace Task1
 
         private static void RemoveEachSecondItem(ICollection<int> collection)
         {
-            while(collection.Count !=1)
+            bool isDeleteIt = false;
+            while (collection.Count != 1)
             {
-                for (int i = 1; i <= collection.Count; i+=2)
+                for (int i = 0; i < collection.Count; i++)
                 {
-                    if (i >= collection.Count)
-                        i = 0;
-                    collection.Remove(collection.ElementAt(i--));
+                    if (isDeleteIt) collection.Remove(collection.ElementAt(i--));
+                    isDeleteIt = !isDeleteIt;
                 }
-                Console.WriteLine("//////////////////");
+                Console.WriteLine("/////////////////////");
                 PrintCollection(collection);
             }
         }
