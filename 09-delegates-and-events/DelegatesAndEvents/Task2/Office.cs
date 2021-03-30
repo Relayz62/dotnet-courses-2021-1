@@ -19,12 +19,10 @@ namespace Task2
         public void Leave(Person person)
         {
             Console.WriteLine($"{person.Name} ушёл с работы");
-            if(PersonLeft != null)
-            {
-                PersonLeft -= person.SayBye;
-                PersonLeft?.Invoke(this, new OfficeEventArgs(person));
-                PersonCame -= person.SayHello;
-            }
+            PersonLeft -= person.SayBye;
+            PersonLeft?.Invoke(this, new OfficeEventArgs(person));
+            PersonCame -= person.SayHello;
+            
         }
     }
 

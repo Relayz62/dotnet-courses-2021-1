@@ -5,53 +5,43 @@ namespace Task3
 {
     class Program
     {
-        public delegate int StringComparer(string first, string second);
         static void Main(string[] args)
         {
             SortModule sortModule = new SortModule();
-            string[] array = { "Как дела?", "Как дела?" };
-            string[] array2 = { "Новый?", "Год?" };
-            Sort(array, CompareStrings);
+            Func<string, string, int> stringComparer = CompareStrings;
+            string[] array = { "Я", "Пошёл", "Гулять", "Яовсем", "Совсем", "Один", "Аовсем", "Потом", "Бовсем" };
+            string[] array2 = { "Я", "Пошёл", "Гулять", "Яовсем", "Совсем", "Один", "Аовсем", "Потом", "Бовсем" };
+            sortModule.SortFinished += SortModule_SortFinished;
+            Thread thread = sortModule.SortAsync(array2, stringComparer);
+            Thread thread2 = sortModule.SortAsync(array, stringComparer);
+            thread.Join();
+            thread2.Join();
             foreach (var item in array)
             {
                 Console.WriteLine(item);
             }
-
-            sortModule.CreateThreadForSorting(array2, CompareStrings);
-            sortModule.SortingFinished += (object sender, EventArgs args) => Console.WriteLine("Sorting Finished");
             foreach (var item in array2)
             {
                 Console.WriteLine(item);
             }
             Console.ReadKey();
-            
         }
 
-        public static void Sort(string[] array, StringComparer stringComparer)
+        private static void SortModule_SortFinished(object sender, EventArgs e)
         {
-            stringComparer += CompareStrings;
-            for (int i = 0; i < array.Length - 1; i++)
-            {
-                switch (stringComparer(array[i], array[i + 1]))
-                {
-                    case 0:
-                        Array.Sort<string>(array, (first, second) => string.Compare(first, second));
-                        break;
-                    case 1:
-                        string temp = array[i];
-                        array[i] = array[i + 1];
-                        array[i + 1] = temp;
-                        break;
-                }
-            }           
-            stringComparer -= CompareStrings;
+            Console.WriteLine("Сортировка закончена");
+
         }
 
         public static int CompareStrings(string first, string second)
         {
-            if (first.Length > second.Length) return -1;
-            if (first.Length < second.Length) return 1;
-            return 0;
+            int compareResultLenght = first.Length.CompareTo(second.Length);
+            int compareResult = first.CompareTo(second);
+            return compareResultLenght == 0 ? compareResult : compareResultLenght;
         }
+
+
+
+
     }
 }

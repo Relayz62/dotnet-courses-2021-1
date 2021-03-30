@@ -5,43 +5,32 @@ using System.Threading;
 
 namespace Task3
 {
-    class SortModule
+    public class SortModule
     {
-        public event EventHandler SortingFinished;
-        public delegate int StringComparer(string first, string second);
-
-        public Thread SortAsync(string[] array, StringComparer stringComparer)
+        public event EventHandler SortFinished;
+        private void Sort(string[] array, Func<string, string, int> stringComparer)
         {
-            stringComparer += CompareStrings;
-            for (int i = 0; i < array.Length - 1; i++)
+            for (int i = 0; i < array.Length; i++)
             {
-                switch (stringComparer(array[i], array[i + 1]))
+                for (int j = 0; j < array.Length - 1; j++)
                 {
-                    case 0:
-                        Array.Sort<string>(array, (first, second) => string.Compare(first, second));
-                        break;
-                    case 1:
-                        string temp = array[i];
-                        array[i] = array[i + 1];
-                        array[i + 1] = temp;
-                        break;
+                    ref string first = ref array[j];
+                    ref string second = ref array[j + 1];
+                    if (stringComparer(first, second) > 0)
+                    {
+                        (first, second) = (second, first);
+                    }
                 }
             }
-            stringComparer -= CompareStrings;
-            SortingFinished?.Invoke(this, EventArgs.Empty);
-            return Thread.CurrentThread;
-        }
-        public int CompareStrings(string first, string second)
-        {
-            if (first.Length > second.Length) return -1;
-            if (first.Length < second.Length) return 1;
-            return 0;
+            SortFinished?.Invoke(this, EventArgs.Empty);
         }
 
-        public void CreateThreadForSorting(string[] array, StringComparer stringComparer)
+        public Thread SortAsync(string[] array, Func<string, string, int> stringComparer)
         {
-            Thread th = new Thread(() => SortAsync(array, stringComparer));
-            th.Start();
+            Thread thread = new Thread(() => Sort(array, stringComparer));
+            thread.Start();
+            return thread;
         }
     }
 }
+

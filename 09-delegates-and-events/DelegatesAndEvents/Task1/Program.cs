@@ -6,11 +6,10 @@ namespace Task1
 {
     class Program
     {
-        public delegate int StringComparer(string first, string second);
         static void Main(string[] args)
         {
-            StringComparer stringComparer = CompareStrings;
-            string[] array = { "Я", "Пошёл", "Совсем", "Гулять", "Один", "Аовсем" };
+            Func<string, string, int> stringComparer = CompareStrings;
+            string[] array = { "Я", "Пошёл", "Гулять", "Яовсем","Совсем", "Один", "Аовсем", "Потом", "Бовсем" };
             Sort(array, stringComparer);
             foreach (var item in array)
             {
@@ -19,29 +18,26 @@ namespace Task1
             Console.ReadKey();
         }
 
-        public static void Sort(string[] array, StringComparer stringComparer)
+        public static void Sort(string[] array, Func<string,string,int> stringComparer)
         {
             for (int i = 0; i < array.Length; i++)
             {
-                string word = array[i];
-                int index = i;
-                for (int j = i; j < array.Length; j++)
+                for (int j = 0; j < array.Length - 1; j++)
                 {
-                    if (stringComparer(word, array[j]) > 0)
+                    ref string first = ref array[j];
+                    ref string second = ref array[j+1];
+                    if (stringComparer(first,second) > 0)
                     {
-                        word = array[j];
-                        index = j;
+                        (first, second) = (second, first);
                     }
                 }
-                array[index] = array[i];
-                array[i] = word;
             }
         }
 
-
         public static int CompareStrings(string first, string second)
         {
-            return first.Length - second.Length;
+            int compareResult = first.Length.CompareTo(second.Length);
+            return compareResult == 0 ?  string.Compare(first, second) : compareResult;
         }
     }
 }
