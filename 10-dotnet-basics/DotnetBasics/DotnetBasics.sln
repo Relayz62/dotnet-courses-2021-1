@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task1", "Task1\Task1.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathLibrary", "MathLibrary\MathLibrary.csproj", "{5D38F74B-DEC3-4136-97AC-AD02E4E3BA95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task2", "Task2\Task2.csproj", "{E3E57272-E99E-4062-AF3E-D9581CAACDE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task3", "Task3\Task3.csproj", "{F07B56ED-0C93-4893-9C11-419F3C29E60E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{5D38F74B-DEC3-4136-97AC-AD02E4E3BA95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D38F74B-DEC3-4136-97AC-AD02E4E3BA95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D38F74B-DEC3-4136-97AC-AD02E4E3BA95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3E57272-E99E-4062-AF3E-D9581CAACDE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3E57272-E99E-4062-AF3E-D9581CAACDE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3E57272-E99E-4062-AF3E-D9581CAACDE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3E57272-E99E-4062-AF3E-D9581CAACDE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F07B56ED-0C93-4893-9C11-419F3C29E60E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F07B56ED-0C93-4893-9C11-419F3C29E60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F07B56ED-0C93-4893-9C11-419F3C29E60E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F07B56ED-0C93-4893-9C11-419F3C29E60E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
