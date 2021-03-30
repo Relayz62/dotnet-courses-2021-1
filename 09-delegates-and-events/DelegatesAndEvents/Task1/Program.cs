@@ -36,8 +36,9 @@ namespace Task1
 
         public static int CompareStrings(string first, string second)
         {
-            int compareResult = first.Length.CompareTo(second.Length);
-            return compareResult == 0 ?  string.Compare(first, second) : compareResult;
+            int compareResultLenght = first.Length.CompareTo(second.Length);
+            int compareResult = first.CompareTo(second);
+            return compareResultLenght == 0 ? compareResult : compareResultLenght;
         }
     }
 }
