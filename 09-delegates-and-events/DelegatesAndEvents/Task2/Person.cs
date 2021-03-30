@@ -4,8 +4,6 @@ using System.Text;
 
 namespace Task2
 {
-    public delegate void SayHello(string otherPerson, DateTime time);
-    public delegate void SayBye(string otherName);
     public class Person
     {
         public string Name { get; set; }
