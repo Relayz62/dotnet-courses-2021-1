@@ -8,6 +8,7 @@ namespace Task2
     {
         private event OfficeEventHandler PersonCame;
         private event OfficeEventHandler PersonLeft;
+        private event OfficeHandler OnCame;
         public void Come(Person person)
         {
             Console.WriteLine($"{person.Name} пришёл на работу");
@@ -25,7 +26,7 @@ namespace Task2
             
         }
     }
-
+    public delegate void OfficeHandler(OfficeEventArgs args);
     public delegate void OfficeEventHandler(object sender, OfficeEventArgs args);
     public class OfficeEventArgs : EventArgs
     {
