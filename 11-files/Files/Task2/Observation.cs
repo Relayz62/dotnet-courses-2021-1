@@ -10,7 +10,7 @@ namespace Task2
         private readonly string _pathToDirect;
         private DirectoryInfo _sourceDirectory;
         private DirectoryInfo _hubDirectory;
-        private FileSystemWatcher fileWatcher;
+        private FileSystemWatcher _fileWatcher;
         private string _pathHub;
         private bool isSub = false;
         private bool isDes = false;
@@ -22,25 +22,24 @@ namespace Task2
             }
             _pathToDirect = pathToDirect;
             _pathHub = pathHub;
+            _sourceDirectory = new DirectoryInfo(_pathToDirect);
+            _fileWatcher = new FileSystemWatcher(_sourceDirectory.FullName, "*.txt");
         }
 
         public bool OnSubscribe()
         {
             isDes = false;
             isSub = true;
-            _sourceDirectory = new DirectoryInfo(_pathToDirect);
             if (!Directory.Exists(_pathHub))
             {
                 Directory.CreateDirectory(_pathHub);
-            }
-
-            fileWatcher = new FileSystemWatcher(_sourceDirectory.FullName, "*.txt");
-            fileWatcher.Created += FileWatcher_Created;
-            fileWatcher.Changed += FileWatcher_Changed;
-            fileWatcher.Renamed += FileWatcher_Renamed;
-            fileWatcher.Deleted += FileWatcher_Deleted;
-            fileWatcher.IncludeSubdirectories = true;
-            fileWatcher.EnableRaisingEvents = true;
+            }         
+            _fileWatcher.Created += FileWatcher_Created;
+            _fileWatcher.Changed += FileWatcher_Changed;
+            _fileWatcher.Renamed += FileWatcher_Renamed;
+            _fileWatcher.Deleted += FileWatcher_Deleted;
+            _fileWatcher.IncludeSubdirectories = true;
+            _fileWatcher.EnableRaisingEvents = true;
             return isSub;
 
         }
@@ -49,12 +48,11 @@ namespace Task2
         {
             isSub = false;
             isDes = true;
-            fileWatcher.Created -= FileWatcher_Created;
-            fileWatcher.Changed -= FileWatcher_Changed;
-            fileWatcher.Renamed -= FileWatcher_Renamed;
-            fileWatcher.Deleted -= FileWatcher_Deleted;
-            fileWatcher.EnableRaisingEvents = false;
-            fileWatcher.Dispose();
+            _fileWatcher.Created -= FileWatcher_Created;
+            _fileWatcher.Changed -= FileWatcher_Changed;
+            _fileWatcher.Renamed -= FileWatcher_Renamed;
+            _fileWatcher.Deleted -= FileWatcher_Deleted;
+            _fileWatcher.EnableRaisingEvents = false;
             return isDes;
         }
 

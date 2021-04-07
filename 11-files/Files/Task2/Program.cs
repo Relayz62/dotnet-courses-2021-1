@@ -6,14 +6,15 @@ namespace Task2
 {
     class Program
     {
+        private static string _source;
+        private static string _pathHub;
         private enum WorkState { Read, Write };
         static void Main(string[] args)
         {
+            ConfigurationLoad();
             string state;
             string timeRollback;
-            const string source = @"C:\Users\User\Desktop\Тест папка";
-            const string pathHub = "Hub";
-            Observation observation = new Observation(source, pathHub);
+            Observation observation = new Observation(_source, _pathHub);
             Console.WriteLine("Выберите режим работы: 0 - Read, 1 - Write");
 
             while (true)
@@ -29,7 +30,7 @@ namespace Task2
                         observation.Rollback(timeRollback);
                         Console.WriteLine("Откат произошёл успешно. Выберите дальнейший режим работы:");
                     }
-                    catch(DirectoryNotFoundException)
+                    catch (DirectoryNotFoundException)
                     {
                         Console.WriteLine("Произошла ошибка, вероятно Вы неверно ввели формат даты и времени/не существующий раздел.");
                     }
@@ -41,6 +42,17 @@ namespace Task2
                 }
             }
 
+        }
+
+        private static void ConfigurationLoad()
+        {
+            IConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
+                 .SetBasePath(Directory.GetCurrentDirectory())
+                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            var configuration = configurationBuilder.Build();
+            _source = configuration["Source"];
+            _pathHub = configuration["PathHub"];
         }
     }
 }
