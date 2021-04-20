@@ -15,7 +15,7 @@ namespace Task2
             string state;
             string timeRollback;
             Observation observation = new Observation(_source, _pathHub);
-            Console.WriteLine("Выберите режим работы: 0 - Read, 1 - Write");
+            Console.WriteLine("Выберите режим работы: 0 - Rollback, 1 - Write");
 
             while (true)
             {
