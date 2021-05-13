@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Entities.Awards>
+
+@{
+    ViewBag.Title = "Awards List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Награды</h2>
+
+<p>
+    @Html.ActionLink("Создать..", "Create")
+</p>
+<table cellpadding="10" cellspacing="10">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var award in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => award.ID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => award.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => award.Description)
+    </td>
+    <td>
+        @Html.ActionLink("Редактировать", "Edit", "Awards", new { ID = award.ID }, new { @class = "btn btn-success" }) |
+        @Html.ActionLink("Удалить", "Edit", "Users", new { ID = award.ID }, new { @class = "btn btn-danger" }) |
+
+    </td>
+</tr>
+    }
+
+</table>

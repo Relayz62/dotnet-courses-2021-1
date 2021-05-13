@@ -1,0 +1,24 @@
+﻿@model Entities.Awards
+
+@{
+    ViewBag.Title = "Редактирование награды";
+
+}
+<form asp-action="Save" asp-controller="Awards">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <input type="hidden" asp-for="ID" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Title" class="control-label">Наименование</label>
+        <input type="text" asp-for="Title" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description" class="control-label">Описание</label>>
+        <input type="text" asp-for="Description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Сохранить</button>
+        @Html.ActionLink("Отмена", "Index", "Awards", new { }, new { @class = "btn btn-warning" })
+    </div>
+</form>

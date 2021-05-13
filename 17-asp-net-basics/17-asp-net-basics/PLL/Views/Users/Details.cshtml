@@ -1,0 +1,51 @@
+﻿@using Department.BLL;
+@using Department.DAL;
+@model Entities.User
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IUserDAO userDAO = new SQLUserDAO();
+    IAwardDAO awardsDAO = new SQLAwardsDAO();
+    ILogicBLL logicBLL = new LogicBLL(userDAO, awardsDAO);
+}
+
+<h2>Подробнее</h2>
+
+<fieldset>
+    <legend>Пользователь</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.FirstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FirstName)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.LastName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastName)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Birthdate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Birthdate)
+    </div>
+
+    <div class="form-group">
+        <p>Награды:</p>
+       @foreach (var award in logicBLL.GetAwardList().Where(a => @logicBLL.GetUserAwards(Model.ID).Contains(a.ID)))
+       {
+           <p>@award.Title</p>
+       }
+
+
+    </div>
+
+</fieldset>
+<p>
+    @Html.ActionLink("Назад к списку пользователей", "Index")
+</p>

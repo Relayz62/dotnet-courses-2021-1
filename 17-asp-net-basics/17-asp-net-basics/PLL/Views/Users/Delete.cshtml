@@ -1,0 +1,15 @@
+﻿
+@model Entities.User
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Delete";
+}
+
+<form method="post">   
+    <h2>Вы уверены, что хотите это удалить?</h2>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Да</button>
+        @Html.ActionLink("Отмена", "Index", "Users", new { }, new { @class = "btn btn-warning" })
+    </div>
+</form>
