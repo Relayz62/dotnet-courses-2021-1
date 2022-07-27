@@ -24,16 +24,7 @@
 |16.|[WEB basics][task16]|[![WEB basics - build](https://github.com/Relayz62/dotnet-courses-2021-1/workflows/WEB%20basics%20-%20build/badge.svg)][web-basics-build]|[![WEB basics - test](https://github.com/Relayz62/dotnet-courses-2021-1/workflows/WEB%20basics%20-%20test/badge.svg)][web-basics-test]|
 |17.|[ASP.NET basics][task17]|[![ASP.NET basics - build](https://github.com/Relayz62/dotnet-courses-2021-1/workflows/ASP.NET%20basics%20-%20build/badge.svg)][asp-net-basics-build]|[![ASP.NET basics - test](https://github.com/Relayz62/dotnet-courses-2021-1/workflows/ASP.NET%20basics%20-%20test/badge.svg)][asp-net-basics-test]|
 
-### <a name="howtouse"></a>Как пользоваться данным репозиторием
-1. Создать репозиторий, используя данный как шаблон:
-    - на странице репозитория нажать зеленую кнопку "Use this template";
-    - задать имя репозитория - "dotnet-courses-2021-1";
-    - репозиторий должен быть приватным (Private).
-2. Добавить тренеров в Collaborators полученного репозитория.
-Settings -> Manage Access -> Invite a collaborator.
-3. Клонировать полученный репозиторий к себе на компьютер.
-4. Обновить README.md файл: во всем документе заменить 'Relayz62' на свой ник. Закоммитить изменения и залить на github. Это нужно для того, чтобы статусные бейджики в таблице правильно отображали результаты сборки и тестирования практических заданий.
-5. Можно приступать к выполнению практических заданий!
+
 
 [c-sharp-basics-build]: https://github.com/Relayz62/dotnet-courses-2021-1/actions?query=workflow%3A%22C%23+Basics+-+build%22
 [c-sharp-basics-test]: https://github.com/Relayz62/dotnet-courses-2021-1/actions?query=workflow%3A%22C%23+Basics+-+test%22
